@@ -11,6 +11,9 @@ use Redirect;
 use App\Events\SendMail;
 use Event;
 use Auth;
+use App\DataTables\MechanicDataTable;
+use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Facades\DataTables;
 
 class MechanicController extends Controller
 {
@@ -105,8 +108,23 @@ class MechanicController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy($id)
     {
-        //
+         $mechanics = Mechanic::find($id);
+        
+        $Id=$mechanics->user_id;
+        $mechanics->delete();
+        $users = User::find($Id);
+        $users->delete();
+        
+        return Redirect::to('/mechanics');
+    }
+
+
+      public function getMechanic(MechanicDataTable $dataTable){
+
+        $mechanics = Mechanic::with([])->get();
+        return $dataTable->render('mechanic.mechanics');
+
     }
 }

@@ -38,7 +38,7 @@
    <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form  method="POST" action="{{ route('customers.store') }}">
+        <form  method="POST" action="#">
         {{csrf_field()}}
           
         <div class="modal-body mx-3" id="inputfacultyModal">

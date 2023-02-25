@@ -11,6 +11,9 @@ use Redirect;
 use App\Events\SendMail;
 use Event;
 use Auth;
+use App\DataTables\CustomerDataTable;
+use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Facades\DataTables;
 
 class CustomerController extends Controller
 {
@@ -102,8 +105,25 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy($id)
     {
-        //
+       
+        $customers = Customer::find($id);
+        // $customers->user_id;
+        $Id=$customers->user_id;
+        $customers->delete();
+        $users = User::find($Id);
+        $users->delete();
+        
+
+        return Redirect::to('/customers');
+    }
+
+
+      public function getCustomer(CustomerDataTable $dataTable){
+
+        $customers = Customer::with([])->get();
+        return $dataTable->render('customer.customers');
+
     }
 }

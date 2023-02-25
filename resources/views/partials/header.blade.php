@@ -17,11 +17,17 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
 
-            {{-- <li>
+            <li>
             <a href="{{route('getCustomer')}}">
-            <i class="fa fa-user" aria-hidden="true">Customer</i>
+            <i class="fa fa-users" aria-hidden="true">Customers</i>
             </a>
-            </li> --}}
+            </li>
+
+                <li>
+            <a href="{{route('getMechanic')}}">
+            <i class="fa fa-users" aria-hidden="true">Mechanic</i>
+            </a>
+            </li>
 
 
           <li class="dropdown">

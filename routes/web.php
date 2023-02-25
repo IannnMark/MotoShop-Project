@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MechanicController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -72,8 +73,23 @@ Route::group(['middleware' => 'role:mechanic'], function() {
 
 //Admin Route Group
 Route::group(['middleware' => 'role:admin'], function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-   
+
+    //customer routes
+   Route::get('/customer', [CustomerController::class, 'index'])->name('customers.index');
+   Route::get('/customers', [CustomerController::class, 'getCustomer'])->name('getCustomer');
+   Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+   Route::post('/customer/import', 'CustomerController@import')->name('customerImport');
+
+
+   //mechanics route
+   Route::get('/mechanic', [MechanicController::class, 'index'])->name('mechanics.index');
+   Route::get('/mechanics', [MechanicController::class, 'getMechanic'])->name('getMechanic');
+   Route::delete('/mechanics/{id}', [MechanicController::class, 'destroy'])->name('mechanics.destroy');
+   Route::post('/mechanic/import', 'MechanicController@import')->name('mechanicImport');
+
+
 
     });
 
