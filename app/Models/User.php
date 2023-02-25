@@ -28,6 +28,10 @@ class User extends Authenticatable
      public function customers(){
         return $this->belongsTo('App\Models\Customer');
     }
+
+    public function mechanics(){
+        return $this->belongsTo('App\Models\Mechanic');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -5,15 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\Mechanic;
+use App\Models\User;
+use Redirect;
+use App\Events\SendMail;
+use Event;
+use Auth;
 
 class MechanicController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+
+
+       public function __construct(){
+        $this->total = 0;
+    }
+
+    public function index(Request $request)
     {
-        //
+         $mechanics = Mechanic::all();
+        return view('mechanic.index', compact('mechanics'));
     }
 
     /**
@@ -21,7 +34,7 @@ class MechanicController extends Controller
      */
     public function create(): Response
     {
-        //
+        return view('mechanic.create');
     }
 
     /**
@@ -43,9 +56,10 @@ class MechanicController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id): Response
+    public function edit($id)
     {
-        //
+        $mechanics = Mechanic::where('user_id',Auth::id())->find($id);
+        return view('mechanic.edit', compact('mechanics'));
     }
 
     /**
@@ -53,7 +67,39 @@ class MechanicController extends Controller
      */
     public function update(Request $request, string $id): RedirectResponse
     {
-        //
+        $mechanics = Mechanic::find($id);
+
+        // $input = $request->all();
+
+        $request->validate([
+             'fname' => 'required|max:255',
+             'lname' => 'required|max:255',
+             'address' => 'required|max:255',
+             'town' => 'required|max:255',
+             'city' => 'required|max:255',
+             'phone' => 'required|max:255',
+             'mechanic_img' => 'mimes:png,jpeg,gif,svg',
+        ]);
+
+         $mechanics->fname = $request->fname;
+         $mechanics->lname = $request->lname;
+         $mechanics->address = $request->address;
+         $mechanics->town = $request->town;
+         $mechanics->city = $request->city;
+         $mechanics->phone = $request->phone;
+
+         if($file = $request->hasFile('mechanic_img')) {
+        $file = $request->file('mechanic_img') ;
+        $fileName = $file->getClientOriginalName();
+        $destinationPath = public_path().'/img_path' ;
+        $input['mechanic_img'] = 'img_path/'.$fileName;
+        $file->move($destinationPath,$fileName);
+        $mechanics->mechanic_img = $fileName; 
+            
+            }
+
+         $mechanics->update();
+         return redirect()->route('user.mprofile')->with('Record Successfully Updated');
     }
 
     /**

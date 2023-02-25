@@ -30,12 +30,12 @@
           <ul class="dropdown-menu">
             @if (Auth::check())
               <li><i class="fa fa-user" aria-hidden="true"><a href="{{ route('user.profile') }}">Customer Profile</a></i></li>
-              {{-- <li><i class="fa fa-user" aria-hidden="true"><a href="{{ route('user.eprofile') }}">Employee Profile</a></i></li> --}}
+              <li><i class="fa fa-user" aria-hidden="true"><a href="{{ route('user.mprofile') }}">Mechanic Profile</a></i></li>
               <li role="separator" class="divider"></li>
               <li><i class="fa fa-sign-out" aria-hidden="true"><a href="{{ route('user.logout') }}">Logout</a></i></li>
             @else
               <li><i class="fa fa-user-plus" aria-hidden="true"><a href="{{ route('user.signup') }}">Customer Signup</a></i></li>
-              {{-- <li><i class="fa fa-user-plus" aria-hidden="true"><a href="{{ route('user.esignup') }}">Employee Signup</a></i></li> --}}
+              <li><i class="fa fa-user-plus" aria-hidden="true"><a href="{{ route('user.msignup') }}">Mechanic Signup</a></i></li>
               <li><i class="fa fa-sign-in" aria-hidden="true"><a href="{{ route('user.signin') }}">Signin</a></i></li>
             @endif
           </ul>

@@ -10,7 +10,7 @@ class Mechanic extends Model
     use HasFactory;
 
 
-     public $table = "customers";
+     public $table = "mechanics";
 
     protected $fillable = ['fname', 'lname', 'address', 'town', 'city', 'phone', 'user_id', 'mechanic_img'];
 
