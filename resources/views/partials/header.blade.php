@@ -29,6 +29,12 @@
             </a>
             </li>
 
+              <li>
+            <a href="{{route('getProduct')}}">
+            <i class="fa fa-users" aria-hidden="true">Product</i>
+            </a>
+            </li>
+
 
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

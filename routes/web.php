@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MechanicController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 
 
 /*
@@ -88,6 +89,16 @@ Route::group(['middleware' => 'role:admin'], function() {
    Route::get('/mechanics', [MechanicController::class, 'getMechanic'])->name('getMechanic');
    Route::delete('/mechanics/{id}', [MechanicController::class, 'destroy'])->name('mechanics.destroy');
    Route::post('/mechanic/import', 'MechanicController@import')->name('mechanicImport');
+
+
+   //product route
+    Route::get('/product', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/product/{id}/update', [ProductController::class, 'update'])->name('products.update');
+    Route::get('/products', [ProductController::class, 'getProduct'])->name('getProduct');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
 
