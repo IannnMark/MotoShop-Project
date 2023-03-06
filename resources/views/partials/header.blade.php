@@ -36,6 +36,13 @@
             </li>
 
 
+                          <li>
+            <a href="{{route('getMotor')}}">
+            <i class="fa fa-users" aria-hidden="true">Motor</i>
+            </a>
+            </li>
+
+
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
           aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span></a>

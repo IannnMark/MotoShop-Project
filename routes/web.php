@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MechanicController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MotorController;
 
 
 /*
@@ -51,10 +52,14 @@ Route::group(['middleware' => 'role:customer'], function() {
 
     Route::get('profile', [UserController::class, 'getProfile'])->name('user.profile');
 
-
-
     Route::put('/customers/{id}/update', [CustomerController::class, 'update'])->name('customers.update');
     Route::get('/customers/{id}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
+
+
+    //motor route
+    Route::get('/motor/create', [MotorController::class, 'create'])->name('motors.create');
+    Route::post('/motor/store', [MotorController::class, 'store'])->name('motors.store');
+
 
 
     });
@@ -67,6 +72,7 @@ Route::group(['middleware' => 'role:mechanic'], function() {
    
     Route::put('/mechanics/{id}/update', [MechanicController::class, 'update'])->name('mechanics.update');
     Route::get('/mechanics/{id}/edit', [MechanicController::class, 'edit'])->name('mechanics.edit');
+    
 
     });
 
@@ -100,6 +106,15 @@ Route::group(['middleware' => 'role:admin'], function() {
     Route::get('/products', [ProductController::class, 'getProduct'])->name('getProduct');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+
+
+    //motor route 
+    Route::get('/motor', [MotorController::class, 'index'])->name('motors.index');
+    Route::delete('/motors/{id}', [MotorController::class, 'destroy'])->name('motors.destroy');
+    Route::get('/motors', [MotorController::class, 'getMotor'])->name('getMotor');
+
+    Route::get('/motor/{id}/edit', [MotorController::class, 'edit'])->name('motors.edit');
+    Route::put('/motor/{id}/update', [MotorController::class, 'update'])->name('motors.update');
 
 
     });
